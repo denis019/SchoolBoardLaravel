@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Service\Board\Transformers;
+namespace App\Core\Service\Student\Transformers;
 
 use App\Core\Parents\AbstractTransformer;
 use App\Core\Service\Student\Models\Student;

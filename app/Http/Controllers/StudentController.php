@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Core\Service\Board\Transformers\GetStudentTransformer;
 use App\Core\Service\Student\Actions\ActionsTrait;
+use App\Core\Service\Student\Transformers\GetStudentTransformer;
 use App\Http\Response\ResponseTrait;
 
 class StudentController extends Controller {

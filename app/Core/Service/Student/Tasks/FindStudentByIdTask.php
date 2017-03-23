@@ -2,10 +2,9 @@
 namespace App\Core\Service\Student\Tasks;
 
 use App\Core\Parents\Action;
-use App\Core\Service\Board\Models\Board;
 use App\Core\Service\Student\Repositories\StudentRepository;
 
-class FindStudentsByBoard extends Action {
+class FindStudentByIdTask extends Action {
 
     /** @var StudentRepository */
     protected $studentRepository;
@@ -15,12 +14,10 @@ class FindStudentsByBoard extends Action {
     }
 
     /**
-     * @param Board $board
-     * @return mixed
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function run(Board $board) {
-        return $this->studentRepository->findBy([
-            'id_board' => $board->id
-        ]);
+    public function run($id) {
+        return $this->studentRepository->findOneWith($id, ['grades', 'board']);
     }
 }

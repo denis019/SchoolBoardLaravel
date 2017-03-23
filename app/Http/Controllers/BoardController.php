@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Core\Service\Board\Actions\ActionsTrait;
-use App\Core\Service\Board\Transformers\ListStudentTransformer;
+use App\Core\Service\Student\Transformers\ListStudentTransformer;
 use App\Http\Response\ResponseTrait;
 
 class BoardController extends Controller {

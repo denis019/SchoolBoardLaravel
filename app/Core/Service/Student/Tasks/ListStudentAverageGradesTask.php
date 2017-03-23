@@ -15,7 +15,7 @@ class ListStudentAverageGradesTask extends Action {
 
         if(!($student instanceof Student)) {
             /** @var Student $student */
-            $student = $this->call(FindStudentById::class, [$student]);
+            $student = $this->call(FindStudentByIdTask::class, [$student]);
         }
 
         $grades = array_pluck($student->grades, 'value');
