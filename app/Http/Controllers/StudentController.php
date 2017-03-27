@@ -2,17 +2,24 @@
 namespace App\Http\Controllers;
 
 use App\Core\Service\Student\Actions\ActionsTrait;
+use App\Core\Service\Student\Exceptions\StudentNotFoundException;
 use App\Core\Service\Student\Transformers\GetStudentTransformer;
 use App\Http\Response\ResponseTrait;
 
 class StudentController extends Controller {
-    use ResponseTrait, ActionsTrait;
+    use ActionsTrait;
 
     public function getStudent($id) {
-        $student = $this->getStudentAction()->run($id);
+        return $this->_api(function () use ($id) {
 
-        $transformedData = (new GetStudentTransformer($student))->transform();
+            $student = $this->getStudentAction()->run($id);
 
-        return $this->successResponse($transformedData, $student->board->response_format);
+            if(is_null($student)) {
+                throw new StudentNotFoundException();
+            }
+
+            $this->format = $student->board->response_format;
+            return (new GetStudentTransformer($student))->transform();
+        });
     }
 }

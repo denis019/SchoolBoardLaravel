@@ -31,7 +31,7 @@ class Board extends Model {
      * @return HasMany
      */
     public function students() {
-        return $this->hasMany(Student::class, 'id_school_board');
+        return $this->hasMany(Student::class, 'id_board');
     }
 
     public function getBoardNameLowerCase() {

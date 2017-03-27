@@ -9,7 +9,7 @@ class GetStudentAction extends Action {
 
     /**
      * @param $id
-     * @return Student
+     * @return Student|null
      */
     public function run($id) {
 

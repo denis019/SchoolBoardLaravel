@@ -79,9 +79,7 @@ PUSHER_APP_SECRET=
 ```
 ### Seed database
 ```sh
-php artisan db:seed --class=BoardSeeder
-php artisan db:seed --class=StudentSeeder
-php artisan db:seed --class=GradeSeeder
+php artisan db:seed
 ```
 
 ### API END POINTS

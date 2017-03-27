@@ -16,7 +16,7 @@ class ListStudentsAverageGradesTask extends Action {
     public function run(Board $board) {
 
         /** @var Student[] $students */
-        $students = $this->call(FindStudentsByBoardTask::class, [$board]);
+        $students = $board->students;
 
         foreach ($students as $student) {
             $this->call(ListStudentAverageGradesTask::class, [$student]);

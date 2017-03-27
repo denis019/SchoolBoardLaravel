@@ -2,19 +2,27 @@
 namespace App\Http\Controllers;
 
 use App\Core\Service\Board\Actions\ActionsTrait;
+use App\Core\Service\Board\Exceptions\BoardNotFoundException;
 use App\Core\Service\Student\Transformers\ListStudentTransformer;
-use App\Http\Response\ResponseTrait;
 
 class BoardController extends Controller {
-    use ResponseTrait, ActionsTrait;
+    use ActionsTrait;
 
     public function listStudents($boardName) {
-        $board = $this->getBoardAction()->run($boardName);
+        return $this->_api(function () use ($boardName) {
 
-        $students = $this->getListStudentsAction()->run($board);
+            $board = $this->getBoardAction()->run($boardName);
 
-        $transformedData =  (new ListStudentTransformer($students))->transform();
+            if(is_null($board)) {
+                throw new BoardNotFoundException();
+            }
 
-        return $this->successResponse($transformedData, $board->response_format);
+            $students = $this->getListStudentsAction()->run($board);
+
+            $transformedData =  (new ListStudentTransformer($students))->transform();
+            $this->format = $board->response_format;
+
+            return $transformedData;
+        });
     }
 }

@@ -17,7 +17,7 @@ class FindStudentsByBoardTask extends Action {
 
     /**
      * @param Board $board
-     * @return mixed
+     * @return Student|null
      */
     public function run(Board $board) {
         return Student::with(['board', 'grades'])->where('id_board', $board->id)->get();
